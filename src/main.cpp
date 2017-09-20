@@ -246,6 +246,11 @@ int main() {
               double xx = car_x+(dist_inc*i)*cos(deg2rad(car_yaw));
               next_x_vals.push_back(xx);//+(dist_inc*i)*cos(deg2rad(car_yaw)));
               next_y_vals.push_back(car_y+(dist_inc*i)*sin(deg2rad(car_yaw)));
+
+              // alternatively try the following
+              // expect the car to stand still - however the planner segfault and car is in middle of nowhere
+              //next_x_vals.push_back(car_x); 
+              //next_y_vals.push_back(car_y);
             }
 
             msgJson["next_x"] = next_x_vals;
