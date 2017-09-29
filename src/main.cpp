@@ -245,7 +245,7 @@ double adjustSpeed(double lane, vector<double> pack, vector<vector<double>> sens
 	if(closestCarAhead < 30.)
 		ref_target = speedCarAhead;
 	if(closestCarAhead < 20.)
-		ref_target = speedCarAhead - 2;
+		ref_target = speedCarAhead - 3;
 
   	return ref_target;
 }
@@ -419,7 +419,7 @@ int main() {
           		ref_v += .2;
           	}
           	if(ref_v > ref_target){
-          		ref_v -= 0.8;
+          		ref_v -= 0.5;
           	}
 
           	costs = {0.0, 0.0, 0.0};
@@ -456,7 +456,7 @@ int main() {
           	std::vector<int>::iterator supporters_iter = std::max_element(std::begin(supporters), std::end(supporters));
           	int max_supporters_element = std::distance(std::begin(supporters), supporters_iter);
 
-          	if(supporters[max_supporters_element] > 15) {
+          	if(supporters[max_supporters_element] > 5) {
 
           		// determine intended direction of movement
           		// in this case the vehicle is right to the new target lane, check if ttcollision[lane-1] is large enough
