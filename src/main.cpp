@@ -586,8 +586,8 @@ int main() {
           	}
 
           	// check the values and their distance
-          	double diff_avg = 0.0, diff_max = 0;
-          	int index;
+          	//double diff_avg = 0.0, diff_max = 0;
+          	//int index;
 
             msgJson["next_x"] = next_x_vals;
           	msgJson["next_y"] = next_y_vals;
