@@ -1,11 +1,15 @@
 # CarND-Path-Planning-Project
 Self-Driving Car Engineer Nanodegree Program
    
-### Simulator.
-You can download the Term3 Simulator which contains the Path Planning Project from the [releases tab (https://github.com/udacity/self-driving-car-sim/releases).
-
 ### Goals
 In this project your goal is to safely navigate around a virtual highway with other traffic that is driving +-10 MPH of the 50 MPH speed limit. You will be provided the car's localization and sensor fusion data, there is also a sparse map list of waypoints around the highway. The car should try to go as close as possible to the 50 MPH speed limit, which means passing slower traffic when possible, note that other cars will try to change lanes too. The car should avoid hitting other cars at all cost as well as driving inside of the marked road lanes at all times, unless going from one lane to another. The car should be able to make one complete loop around the 6946m highway. Since the car is trying to go 50 MPH, it should take a little over 5 minutes to complete 1 loop. Also the car should not experience total acceleration over 10 m/s^2 and jerk that is greater than 50 m/s^3.
+
+### Approach
+I also used the spline approach to create a smooth trajectory and waypoints. I incorporated a few differences. I didn't append the new computed waypoints to the end of the previous path. Instead i attached to the previous path much earlier which ends up in a more responsive behaviour. Second the anchor points of the spline were scaled in their s direction depending on the velocity.
+
+Each lane is evaluated using a set of cost functions adding a penalty. The lower the overall penalty, the better. The decisions made are put into the supporters array. The lane with the maximum support above a threshold is taken if it is considered to be secure to switch lanes. For each lane a reaction time is calculated for the following vehicle. This depends on speed difference to the ego vehicle and the distance. The higher the value, the safer. A lane change is only performed if the follower has more than 2 seconds of reaction time. Double lane changes can be indicated, but are ignored. Instead the ego waits for a single lane change. That restricts the set of states. 
+
+The ego vehicle can end in a local minima situation. When the vehicle is forced to drive on the right side if possible, this situation happens more often. A strategy has to be developed, e.g. let it fall back or put a penalty on crowds.
 
 #### The map of the highway is in data/highway_map.txt
 Each waypoint in the list contains  [x,y,s,dx,dy] values. x and y are the waypoint's map coordinate position, the s value is the distance along the road to get to that waypoint in meters, the dx and dy values define the unit normal vector pointing outward of the highway loop.
